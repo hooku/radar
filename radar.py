@@ -20,10 +20,10 @@ CROP_SIZE = 600
 RESIZE_SIZE = 450
 CROP_OFFSET_X = 50
 CROP_OFFSET_Y = -150
-FONT_SIZE = 20
+FONT_SIZE = 45
 
 # Global parameters for WebP compression
-WEBP_QUALITY = 80  # Quality setting for lossy compression (0-100)
+WEBP_QUALITY = 30  # Quality setting for lossy compression (0-100)
 WEBP_LOSSLESS = False  # Toggle for lossless compression
 
 # Global ffmpeg parameters with default fps set to 3
@@ -63,12 +63,23 @@ def download_and_process_image():
         print(f"{webp_filename} already exists. Skipping download.")
         return
 
-    # Download the image
-    img_data = requests.get(img_url).content
+    attempt = 0
+    max_retries = 3
     png_path = os.path.join(save_dir, png_filename)
-    with open(png_path, 'wb') as img_file:
-        img_file.write(img_data)
-    print(f"Downloaded {png_filename}")
+    while attempt < max_retries:
+        try:
+            # Download the image
+            img_data = requests.get(img_url).content
+            with open(png_path, 'wb') as img_file:
+                img_file.write(img_data)
+            print(f"Downloaded {png_filename}")
+            break
+        except Exception as e:
+            attempt += 1
+            print(f"Attempt {attempt} failed: {e}")
+            if attempt < max_retries:
+                time.sleep(1)  # Wait a bit before retrying
+    print(f"Failed to download {png_filename} after {max_retries} attempts")
 
     # Open the image for processing
     with Image.open(png_path) as img:
@@ -169,22 +180,24 @@ def create_animated_mp4s():
         with open(input_list_file, 'w') as f:
             for file in files:
                 f.write(f"file '{file}'\n")
+                f.write("duration 0.25\n");
 
         # Run ffmpeg command to create the MP4 file
         ffmpeg_command = [
             'ffmpeg',
+            '-y',
             '-f', 'concat',
             '-safe', '0',
             '-i', input_list_file
         ] + FFMPEG_PARAMS + [output_path]
 
-        print(ffmpeg_command)
+        print(' '.join(ffmpeg_command))
 
         subprocess.run(ffmpeg_command, check=True)
         print(f"Created MP4 video: {output_filename}")
 
         # Remove the temporary input list file
-        #os.remove(input_list_file)
+        os.remove(input_list_file)
 
 def main(periodic, interval):
     if periodic:
