@@ -1,0 +1,65 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Radar foreground -->
+    <group
+        android:translateX="54"
+        android:translateY="54"
+        android:scaleX="0.625"
+        android:scaleY="0.625">
+        <!-- Outer circle -->
+        <path
+            android:fillColor="@android:color/transparent"
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="3"
+            android:pathData="M0,-45a45,45 0,1 1,0,90a45,45 0,1 1,0,-90z" />
+        <!-- Middle circle -->
+        <path
+            android:fillColor="@android:color/transparent"
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="2.5"
+            android:pathData="M0,-30a30,30 0,1 1,0,60a30,30 0,1 1,0,-60z" />
+        <!-- Inner circle -->
+        <path
+            android:fillColor="@android:color/transparent"
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="2.083"
+            android:pathData="M0,-15a15,15 0,1 1,0,30a15,15 0,1 1,0,-30z" />
+        <!-- Radar line rotated 45 degrees clockwise -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="2"
+            android:pathData="M0,0l31.82,-31.82" />
+        <!-- Radar sweep with gradient -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:strokeColor="@android:color/transparent"
+            android:pathData="M0,0L38.97,-22.5A45,45 0,0,0,31.82,-31.82Z">
+        </path>
+        <!-- Dots representing clouds with positions distributed inside and outside the middle circle -->
+        <!-- Inside middle circle -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M-10,-10a3,3 0,1 1,0,6a3,3 0,1 1,0,-6z" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M10,10a3,3 0,1 1,0,6a3,3 0,1 1,0,-6z" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M-15,15a3,3 0,1 1,0,6a3,3 0,1 1,0,-6z" />
+        <!-- Outside middle circle but within outer circle -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M20,-35a3,3 0,1 1,0,6a3,3 0,1 1,0,-6z" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M-25,25a3,3 0,1 1,0,6a3,3 0,1 1,0,-6z" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M30,5a3,3 0,1 1,0,6a3,3 0,1 1,0,-6z" />
+    </group>
+</vector>
