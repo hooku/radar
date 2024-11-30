@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: text/plain');
 
-$directory = 'C:\\git\\hooku\\radar\\downloaded_images';
+$directory = 'downloaded_images';
 $mp4_files = glob($directory . '\\*.mp4');
 $webp_files = glob($directory . '\\*.webp');
 
